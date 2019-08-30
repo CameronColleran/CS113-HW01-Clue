@@ -68,12 +68,10 @@ public class MyClueSolver {
         ArrayList<Integer> wrongWeapons = new ArrayList<Integer>(); // make wrong weapon into an array of ints which can be chekced against the random generaton done on line 69
         do {
             weapon = random.nextInt(6) + 1;
-            /*
-            if (weapon == wrongWeapon) // reformat this with a loop which compares weapon to all previously added wrong numbers in weapon array
+            for (int i = 0; i < wrongWeapons.size(); i++) // reformat this with a loop which compares weapon to all previously added wrong numbers in weapon array
             {
-                weapon = random.nextInt(6) + 1;
+                
             }
-            */
             location = random.nextInt(10) + 1;
             murder = random.nextInt(6) + 1;
             solution = jack.checkAnswer(weapon, location, murder);
