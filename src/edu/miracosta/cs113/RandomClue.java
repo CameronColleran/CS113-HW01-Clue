@@ -61,6 +61,9 @@ public class RandomClue {
         answerSet = keyboard.nextInt();
         keyboard.close();
 
+        // Algorithm: Use result of check answer to eliminate incorrect guesses, eventually will lead to
+        // the correct answer by process of elimination
+
         // PROCESSING
         jack = new AssistantJack(answerSet);
 
@@ -70,6 +73,7 @@ public class RandomClue {
             murder = random.nextInt(6) + 1;
             solution = jack.checkAnswer(weapon, location, murder);
         } while (solution != 0);
+
 
         answer = new Theory(weapon, location, murder);
 

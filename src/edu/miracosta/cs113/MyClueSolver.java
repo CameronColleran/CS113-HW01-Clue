@@ -10,7 +10,7 @@ package edu.miracosta.cs113;
  * You can use this file as a guide to create your own SEPARATE driver for
  * your implementation that can solve it in <= 20 times consistently.
  *
- * @author Nery Chapeton-Lamas (material from Kevin Lewis)
+ * @author Cameron Colleran
  * @version 1.0
  *
  */
@@ -57,7 +57,7 @@ public class MyClueSolver {
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
 
-        // INPUT ///
+        // INPUT
         System.out.println("Which theory would like you like to test? (1, 2, 3[random]): ");
         answerSet = keyboard.nextInt();
         keyboard.close();
@@ -65,40 +65,34 @@ public class MyClueSolver {
         // PROCESSING
         jack = new AssistantJack(answerSet);
 
-        /*
-        ArrayList<Integer> wrongWeapons = new ArrayList<Integer>(); // make wrong weapon into an array of ints which can be chekced against the random generaton done on line 69
-        do {
-            weapon = random.nextInt(6) + 1;
-            for (int i = 0; i < wrongWeapons.size(); i++) // reformat this with a loop which compares weapon to all previously added wrong numbers in weapon array
-            {
+        // Algorithm: Use result of check answer to eliminate incorrect guesses by incrementing from a base of 1 on
+        // all three variables, eventually will lead to the correct answer by process of elimination
 
-            }
-            location = random.nextInt(10) + 1;
-            murder = random.nextInt(6) + 1;
-            solution = jack.checkAnswer(weapon, location, murder);
-            if (solution == 1)
-            {
-                // go back and exclude the number that was generated for WEAPON as that is incorrect
-                wrongWeapons.add(weapon);
-            }
-            if (solution == 2)
-            {
-                // go back and exclude the number that was generated for LOCATION as that is incorrect
-            }
-            if (solution == 3)
-            {
-                // go back and exclude the number that was generated for PERSON as that is incorrect
-            }
-        } while (solution != 0);
-        */
-        //answer = new Theory(weapon, location, murder);
+        weapon = 1;
+        location = 1;
+        murder = 1;
 
-        do {
-            weapon = random.nextInt(6) + 1;
-            location = random.nextInt(10) + 1;
-            murder = random.nextInt(6) + 1;
+        solution = jack.checkAnswer(weapon, location, murder);
+
+        while (solution != 0)
+        {
+            if (solution == 1) // if answer for WEAPON is not right, increment by 1
+            {
+                weapon++;
+            }
+            else if (solution == 2) // if answer for LOCATION is not right, increment by 1
+            {
+                location++;
+            }
+            else if (solution == 3) // if answer for MURDER is not right, increment by 1
+            {
+                murder++;
+            }
             solution = jack.checkAnswer(weapon, location, murder);
-        } while (solution != 0);
+        }
+
+        // After this series of conditionals has completed, the answer HAS to be correct by virtue of the process of
+        // elimination
 
         answer = new Theory(weapon, location, murder);
 
